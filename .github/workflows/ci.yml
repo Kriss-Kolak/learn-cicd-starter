@@ -17,9 +17,14 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: "1.25.1"
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
 
       - name: Run go test with cover statistics
         run: go test ./... -cover
+      
+      - name: Run gosec
+        run: gosec ./...
 
   style:
     name: Style
